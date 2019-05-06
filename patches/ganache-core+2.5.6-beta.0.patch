@@ -1,0 +1,28 @@
+diff --git a/node_modules/ganache-core/lib/utils/to.js b/node_modules/ganache-core/lib/utils/to.js
+index 7af5cbf..82f6533 100644
+--- a/node_modules/ganache-core/lib/utils/to.js
++++ b/node_modules/ganache-core/lib/utils/to.js
+@@ -47,7 +47,7 @@ module.exports = {
+ 
+   _rpcQuantityHexString: function(val) {
+     val = this.hex(val);
+-    // remove all zeroes leading zeros, `0+`, from the hex-encoded value
++    // remove all leading zeros, `0+`, from the hex-encoded value
+     // This doesn't remove the last 0 which would be captured by `(.+?)`
+     val = val.replace(/^(?:0x)(?:0+(.+?))?$/, "0x$1");
+     return val;
+diff --git a/node_modules/ganache-core/lib/utils/transaction.js b/node_modules/ganache-core/lib/utils/transaction.js
+index 5bff9f8..73bf1c7 100644
+--- a/node_modules/ganache-core/lib/utils/transaction.js
++++ b/node_modules/ganache-core/lib/utils/transaction.js
+@@ -300,8 +300,8 @@ module.exports = class Transaction extends EthereumJsTransaction {
+       gasPrice: to.rpcQuantityHexString(this.gasPrice),
+       input: to.rpcDataHexString(this.data),
+       v: to.nullableRpcQuantityHexString(this.v),
+-      r: to.nullableRpcDataHexString(this.r),
+-      s: to.nullableRpcDataHexString(this.s)
++      r: to.nullableRpcQuantityHexString(this.r),
++      s: to.nullableRpcQuantityHexString(this.s)
+     };
+ 
+     return resultJSON;
